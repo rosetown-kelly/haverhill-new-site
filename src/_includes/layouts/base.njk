@@ -5,12 +5,13 @@
     <title>{{ title or "Haverhill Business Enterprises Ltd" }}</title>
 
     {% if description %}
-      <meta name="description" content="{{ description }}">
+        <meta name="description" content="{{ description or 'Commercial real estate listings for Haverhill Business Enterprises Ltd in Alberta' }}">
     {% endif %}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {# Your favicon is sitting in src/, so it will be at /favicon.png #}
     <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
+    <link rel="canonical" href="{{ metadata.url }}{{ page.url }}">
 
     <style>
 
