@@ -1,5 +1,5 @@
 module.exports = function (eleventyConfig) {
-  // Copy everything inside src/assets to _site/assets
+  // Copy everything in src/assets to /assets in the output
   eleventyConfig.addPassthroughCopy("src/assets");
 
   return {
