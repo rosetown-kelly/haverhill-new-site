@@ -1,0 +1,163 @@
+---
+layout: layouts/base.njk
+title: Barrhead Listing – Haverhill
+description: Commercial space in Barrhead suitable for office, retail, non-profit or mixed-use tenants.
+showBackLink: true
+---
+
+<div class="wrapper">
+  <!-- Listing header -->
+  <section class="listing-header">
+    <h1>Barrhead Commercial Property - Former Transportation Building</h1>
+    <p class="address">4513 62 AV, Barrhead, Alberta</p>
+    <span class="status-large">For Lease or Sale</span>
+    <div class="price">Call to discuss leasing options</div>
+    <div class="price">Sale Price: $599,000</div>
+  </section>
+
+  <!-- Photo gallery -->
+  <section class="gallery">
+    <div class="gallery-main">
+      <img src="/assets/main-photo-new1.jpg" alt="Barrhead property exterior" class="active">
+      <img src="/assets/main-area-photo.jpg" alt="Barrhead property interior">
+      <img src="/assets/office-photo.jpg" alt="Barrhead office photo">
+      <img src="/assets/aerial-new1.jpg" alt="Barrhead aerial photo">
+
+      <button class="gallery-control left" type="button" aria-label="Previous photo">&lt;</button>
+      <button class="gallery-control right" type="button" aria-label="Next photo">&gt;</button>
+    </div>
+
+    <div class="gallery-dots">
+      <button type="button" class="active" aria-label="Photo 1"></button>
+      <button type="button" aria-label="Photo 2"></button>
+      <button type="button" aria-label="Photo 3"></button>
+      <button type="button" aria-label="Photo 4"></button>
+    </div>
+  </section>
+
+  <!-- Info layout -->
+  <div class="content-grid">
+    <!-- Left column: description + highlights -->
+    <div>
+      <article class="section-card">
+        <h2>Property Overview</h2>
+        <p>
+          Commercial space in Barrhead suitable for office, retail, non-profit or mixed-use tenants.
+          Open floor plan and easily customizable. Ample space to build an expansion, warehouse, or detached structure.
+        </p>
+        <p>
+          This Barrhead property offers flexible configurations for a variety of business types.
+        </p>
+      </article>
+
+      <article class="section-card">
+        <h2>Highlights</h2>
+        <ul class="highlights-list">
+          <li>One acre parcel</li>
+          <li>60 ft × 110 ft building</li>
+          <li>Ample yard space for storage or future development</li>
+          <li>Could be easily adapted to multiple tenants</li>
+          <li>Easy access to Highway 18, in Barrhead's NE industrial area.</li>
+        </ul>
+      </article>
+
+      <article class="section-card">
+        <h2>Additional Details</h2>
+        <p>
+          Concrete block building with built up roof. Originally constructed in 1983.
+        </p>
+      </article>
+    </div>
+
+    <!-- Right column: key facts + location -->
+    <div>
+      <aside class="section-card">
+        <h2>Key Facts</h2>
+        <ul class="key-facts-list">
+          <li><span class="key-facts-label">Municipality:</span> Barrhead, Alberta</li>
+          <li><span class="key-facts-label">Property Type:</span> Retail / Office / Community</li>
+          <li><span class="key-facts-label">Available Area:</span> 6,600 sq ft</li>
+          <li><span class="key-facts-label">Zoning:</span> M1 Medium Industry</li>
+          <li><span class="key-facts-label">Occupancy:</span> Available Immediately</li>
+          <li><span class="key-facts-label">Parking:</span> Surface parking on-site</li>
+        </ul>
+      </aside>
+
+      <aside class="section-card">
+        <h2>Location</h2>
+        <p class="location-note">
+          4513 62 AV, Barrhead, Alberta
+        </p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2577.999741155369!2d-114.39641272316396!3d54.13492391542879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x539f5ea6402ff46f%3A0x8cb840d5a571ee72!2s4513%2062%20Ave%2C%20Barrhead%2C%20AB%20T7N%201A5!5e1!3m2!1sen!2sca!4v1764400481921!5m2!1sen!2sca"
+          loading="lazy"
+          allowfullscreen=""
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </aside>
+
+      <aside class="section-card">
+        <h2>Contact</h2>
+        <p>
+          For sale inquiries contact Sunnyside Realty<br>
+          Charlie Parsons<br>
+          <a href="mailto:sunnysiderealty@outlook.com">sunnysiderealty@outlook.com</a><br>
+          <a href="tel:780-674-7704">780-674-7704</a>
+        </p>
+        <p>
+          For lease inquiries please contact:<br>
+          Haverhill Business Enterprises Ltd.<br>
+          <a href="mailto:info@haverhillbel.com">info@haverhillbel.com</a><br>
+          <a href="tel:780-918-6175">780-918-6175</a>
+        </p>
+      </aside>
+    </div>
+  </div>
+
+  <div class="back-link-bottom">
+    <a href="/">← Back to Home</a>
+  </div>
+</div>
+
+<script>
+  // Simple image carousel logic
+  (function () {
+    const images = document.querySelectorAll('.gallery-main img');
+    const prevBtn = document.querySelector('.gallery-control.left');
+    const nextBtn = document.querySelector('.gallery-control.right');
+    const dots = document.querySelectorAll('.gallery-dots button');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+      if (!images.length) return;
+
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      currentIndex = index;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      showImage(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      showImage(currentIndex + 1);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        showImage(i);
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title or "Haverhill Business Enterprises Ltd" }}</title>
+
+    {% if description %}
+      <meta name="description" content="{{ description }}">
+    {% endif %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {# Your favicon is sitting in src/, so it will be at /favicon.png #}
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+
+    <style>
+
+    main {
+        flex: 1;
+        padding-top: 150px;
+    }
+      * {
+        box-sizing: border-box;
+      }
+
+    html, body {
+    height: 100%;
+    }
+
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #222;
+
+    display: flex;
+    flex-direction: column;
+    }
+
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ========================
+         Navbar (shared)
+         ======================== */
+      .navbar {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+
+      .navbar-logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-logo img {
+        max-width: 250px;
+        height: auto;
+      }
+
+      .navbar-link {
+        font-size: 18px;
+        white-space: nowrap;
+      }
+
+      .navbar-spacer {
+        height: 120px;
+      }
+
+      /* ========================
+         Home page (listings)
+         ======================== */
+      .home-listings-page {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .listings-container {
+        width: 100%;
+        max-width: 800px;
+        margin-top: 20px;
+      }
+
+      .listings-container h2 {
+        margin-top: 0;
+      }
+
+      .listing-card {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .listing-card img {
+        width: 180px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+
+      .listing-info h3 {
+        margin: 0 0 10px 0;
+        font-size: 22px;
+      }
+
+      .listing-info p {
+        margin: 5px 0;
+      }
+
+      .listing-info a {
+        font-size: 16px;
+        margin-top: 10px;
+        display: inline-block;
+      }
+
+      .status {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        background-color: #e0f0ff;
+        color: #004a99;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      /* ========================
+         Listing detail page
+         (Barrhead)
+         ======================== */
+
+      .wrapper {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px 20px 60px;
+      }
+
+      .listing-header {
+        margin-top: 25px;
+      }
+
+      .listing-header h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+
+      .listing-header .address {
+        margin: 0 0 5px;
+        font-size: 16px;
+        color: #555;
+      }
+
+      .listing-header .status-large {
+        display: inline-block;
+        margin: 8px 0;
+        padding: 4px 10px;
+        border-radius: 20px;
+        background-color: #e0f0ff;
+        color: #004a99;
+        font-size: 20px;
+      }
+
+      .listing-header .price {
+        margin-top: 10px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      /* Gallery */
+      .gallery {
+        margin-top: 25px;
+      }
+
+      .gallery-main {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        background: #000;
+      }
+
+      .gallery-main img {
+        width: 100%;
+        height: auto;
+        display: none;
+      }
+
+      .gallery-main img.active {
+        display: block;
+      }
+
+      .gallery-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        line-height: 40px;
+        text-align: center;
+      }
+
+      .gallery-control.left {
+        left: 10px;
+      }
+
+      .gallery-control.right {
+        right: 10px;
+      }
+
+      .gallery-dots {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .gallery-dots button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        margin: 0 4px;
+        background-color: #ccc;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .gallery-dots button.active {
+        background-color: #333;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      @media (max-width: 800px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .section-card {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        margin-bottom: 20px;
+      }
+
+      .section-card h2 {
+        margin-top: 0;
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+
+      .key-facts-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .key-facts-list li {
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+
+      .key-facts-label {
+        font-weight: bold;
+      }
+
+      .section-card p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0 0 10px;
+      }
+
+      .highlights-list {
+        padding-left: 18px;
+        margin: 5px 0 0;
+        font-size: 14px;
+      }
+
+      .highlights-list li {
+        margin-bottom: 4px;
+      }
+
+      .location-note {
+        font-size: 13px;
+        color: #666;
+      }
+
+      .section-card iframe {
+        width: 100%;
+        max-width: 100%;
+        height: 300px;
+        border: 0;
+        border-radius: 8px;
+        display: block;
+      }
+
+      .back-link-bottom {
+        margin-top: 30px;
+        font-size: 14px;
+      }
+
+      .back-link-bottom a {
+        color: #0066cc;
+      }
+
+      .back-link-bottom a:hover {
+        text-decoration: underline;
+      }
+
+      .site-footer {
+        text-align: center;
+        padding: 20px;
+        color: #555;
+        font-size: 14px;
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "partials/navbar.njk" %}
+
+    <main>
+      {{ content | safe }}
+    </main>
+
+    {% include "partials/footer.njk" %}
+  </body>
+</html>
