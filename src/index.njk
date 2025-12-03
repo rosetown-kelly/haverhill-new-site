@@ -1,23 +1,25 @@
 ---
 layout: layouts/base.njk
-title: Haverhill Business Enterprises Ltd
-description: Commercial real estate listings.
+title: "Commercial Real Estate Listings – Haverhill"
+description: "View current commercial real estate listings from Haverhill Business Enterprises Ltd."
 ---
 
 <div class="home-listings-page">
   <div class="listings-container">
     <h2>Haverhill's Current Listings</h2>
 
-    <div class="listing-card">
-      <img src="/assets/main-photo-new1.jpg" alt="Listing Photo">
-      <div class="listing-info">
-        <h3>Barrhead - Former Alberta Transportation Building</h3>
-        <p>4513 62 AV, Barrhead, Alberta</p>
-        <span class="status">For Lease or Sale</span>
-        <p>Square Footage: 6,600 sq ft</p>
-        <p>Type: Commercial (M1 Zoning)</p>
-        <a href="/barrhead-listing/">View Full Details →</a>
+    {% for listing in listings %}
+      <div class="listing-card">
+        <img src="{{ listing.heroImage }}" alt="{{ listing.name }}">
+        <div class="listing-info">
+          <h3>{{ listing.name }}</h3>
+          <p>{{ listing.address }}</p>
+          <span class="status">{{ listing.status }}</span>
+          <p>Square Footage: {{ listing.squareFootage }}</p>
+          <p>Type: {{ listing.type }}</p>
+          <a href="/{{ listing.slug }}/">View Full Details →</a>
+        </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
