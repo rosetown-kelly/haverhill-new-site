@@ -5,8 +5,9 @@ pagination:
   size: 1
   alias: listing
 permalink: "/{{ listing.slug }}/"
-title: "{{ listing.shortTitle }} – Haverhill"
-description: "{{ listing.address }} – {{ listing.status }}"
+eleventyComputed:
+  title: "{{ listing.shortTitle }} – Haverhill"
+  description: "{{ listing.address }} – {{ listing.status }}"
 ---
 
 <div class="wrapper">
