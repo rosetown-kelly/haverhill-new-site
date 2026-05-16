@@ -10,13 +10,20 @@ description: "View current commercial real estate listings from Haverhill Busine
 
     {% for listing in listings %}
       <div class="listing-card">
-        <img src="{{ listing.heroImage }}" alt="{{ listing.name }}">
+        <img src="{{ listing.heroImage or listing.galleryImages[0] }}" alt="{{ listing.name }}">
         <div class="listing-info">
           <h3>{{ listing.name }}</h3>
           <p>{{ listing.address }}</p>
           <span class="status">{{ listing.status }}</span>
-          <p>Square Footage: {{ listing.squareFootage }}</p>
-          <p>Type: {{ listing.type }}</p>
+          <p>Available Area: {{ listing.availableArea or listing.squareFootage }}</p>
+          <p>Property Type: {{ listing.propertyType }}</p>
+          <p>Zoning: {{ listing.zoning or listing.type }}</p>
+          {% if listing.salePrice %}
+            <p>Sale Price: {{ listing.salePrice }}</p>
+          {% endif %}
+          {% if listing.leaseNote %}
+            <p>{{ listing.leaseNote }}</p>
+          {% endif %}
           <a href="/{{ listing.slug }}/">View Full Details →</a>
         </div>
       </div>

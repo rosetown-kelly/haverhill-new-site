@@ -81,8 +81,8 @@ eleventyComputed:
         <ul class="key-facts-list">
           <li><span class="key-facts-label">Municipality:</span> {{ listing.address }}</li>
           <li><span class="key-facts-label">Property Type:</span> {{ listing.propertyType }}</li>
-          <li><span class="key-facts-label">Available Area:</span> {{ listing.squareFootage }} ft</li>
-          <li><span class="key-facts-label">Zoning:</span> {{ listing.type }}</li>
+          <li><span class="key-facts-label">Available Area:</span> {{ listing.availableArea or listing.squareFootage }}</li>
+          <li><span class="key-facts-label">Zoning:</span> {{ listing.zoning or listing.type }}</li>
           <li><span class="key-facts-label">Occupancy:</span> {{ listing.occupancy }}</li>
           <li><span class="key-facts-label">Parking:</span> {{ listing.parking }}</li>
         </ul>
